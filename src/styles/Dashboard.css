@@ -1,0 +1,127 @@
+/* ── Page header ───────────────────────────────────────── */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.3px;
+}
+.page-title span { color: var(--accent); }
+
+.page-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 3px;
+  font-family: var(--font-mono);
+}
+
+/* ── Mini stat bar ─────────────────────────────────────── */
+.stat-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.stat-pill-value {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.stat-pill-blue   .stat-pill-value { color: var(--accent); }
+.stat-pill-green  .stat-pill-value { color: var(--green); }
+.stat-pill-red    .stat-pill-value { color: var(--red); }
+
+/* ── Brand card grid ───────────────────────────────────── */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.brand-card-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--accent-dim), rgba(0,128,255,0.1));
+  border: 1px solid var(--border-bright);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.brand-card-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.brand-card-meta {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.brand-card-footer {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-card-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .grid-cards { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .page-title { font-size: 20px; }
+}
+
+@media (max-width: 480px) {
+  .grid-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .page-header { flex-direction: row; align-items: center; }
+  .page-title { font-size: 18px; }
+  .brand-card-icon { width: 34px; height: 34px; font-size: 16px; margin-bottom: 8px; }
+  .brand-card-name { font-size: 15px; }
+  .stat-bar { gap: 5px; }
+  .stat-pill { padding: 4px 10px; font-size: 11px; }
+}
+
+@media (max-width: 360px) {
+  .grid-cards { grid-template-columns: 1fr; }
+}

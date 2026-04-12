@@ -1,0 +1,163 @@
+/* ── Model hero ────────────────────────────────────────── */
+.model-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.model-hero-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+.model-hero-title span { color: var(--accent); }
+
+.model-hero-status {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  margin-top: 4px;
+}
+
+.model-rename-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ── Compact stat strip (same as BrandPage) ────────────── */
+.model-stat-strip {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.model-stat-item {
+  flex: 1;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.model-stat-item + .model-stat-item {
+  border-left: 1px solid var(--border);
+}
+
+.model-stat-value {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.model-stat-label {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.model-stat-blue  .model-stat-value { color: var(--accent); }
+.model-stat-green .model-stat-value { color: var(--green); }
+.model-stat-red   .model-stat-value { color: var(--red); }
+
+/* ── Progress block ────────────────────────────────────── */
+.progress-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+/* ── Action panel ──────────────────────────────────────── */
+.action-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.action-panel-title {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.qty-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.qty-label {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.qty-input {
+  width: 72px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  padding: 8px 10px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.18s;
+}
+.qty-input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-dim); }
+
+.action-btns {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .model-hero-title { font-size: 18px; }
+  .model-stat-value { font-size: 18px; }
+  .model-stat-item { padding: 9px 10px; }
+}
+
+@media (max-width: 480px) {
+  .model-hero { flex-direction: column; }
+  .action-btns .btn { flex: 1; justify-content: center; }
+  .qty-row { gap: 8px; }
+  .model-stat-value { font-size: 16px; }
+}
