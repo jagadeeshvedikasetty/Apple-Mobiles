@@ -12,6 +12,7 @@ const BrandPage = () => {
   const addToast = useToast();
 
   const [phone, setPhone] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [showAddModel, setShowAddModel] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -74,6 +75,10 @@ const BrandPage = () => {
   const totalSold      = phone.models.reduce((s, m) => s + m.sold, 0);
   const totalStock     = phone.models.reduce((s, m) => s + m.totalAdded, 0);
 
+  const filteredModels = phone.models.filter((m) =>
+    m.modelName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <div className="page-wrapper">
@@ -109,9 +114,19 @@ const BrandPage = () => {
               {phone.models.length} model{phone.models.length !== 1 ? "s" : ""} · click to manage stock
             </p>
           </div>
-          <button className="btn btn-primary" onClick={() => setShowAddModel(true)}>
-            ➕ Add Model
-          </button>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Search models..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ width: '200px' }}
+            />
+            <button className="btn btn-primary" onClick={() => setShowAddModel(true)}>
+              ➕ Add Model
+            </button>
+          </div>
         </div>
 
         {/* ── Models list ── */}
@@ -121,9 +136,15 @@ const BrandPage = () => {
             <div className="empty-state-text">No models yet</div>
             <div className="empty-state-sub">Add the first model for {phone.name}</div>
           </div>
+        ) : filteredModels.length === 0 ? (
+          <div className="empty-state animate-in">
+            <div className="empty-state-icon">🔍</div>
+            <div className="empty-state-text">No matches found</div>
+            <div className="empty-state-sub">Try a different search term</div>
+          </div>
         ) : (
           <div className="model-list">
-            {phone.models.map((model, i) => {
+            {filteredModels.map((model, i) => {
               const pct   = model.totalAdded > 0 ? Math.round((model.remaining / model.totalAdded) * 100) : 0;
               const isLow = model.remaining > 0 && model.remaining <= 3;
               const isOut = model.remaining === 0;

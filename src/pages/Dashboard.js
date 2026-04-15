@@ -13,6 +13,7 @@ const Dashboard = () => {
   const addToast = useToast();
 
   const [phones, setPhones] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -60,6 +61,10 @@ const Dashboard = () => {
   const totalSold      = phones.reduce((s, p) => s + p.models.reduce((x, m) => x + m.sold, 0), 0);
   const totalRemaining = phones.reduce((s, p) => s + p.models.reduce((x, m) => x + m.remaining, 0), 0);
 
+  const filteredPhones = phones.filter((p) =>
+    p.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <div className="page-wrapper">
@@ -90,9 +95,19 @@ const Dashboard = () => {
             <h1 className="page-title">Phone <span>Brands</span></h1>
             <p className="page-desc">{totalModels} models · click a brand to manage</p>
           </div>
-          <button className="btn btn-primary" onClick={() => setShowAddModal(true)}>
-            ➕ Add Brand
-          </button>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Search brands..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ width: '200px' }}
+            />
+            <button className="btn btn-primary" onClick={() => setShowAddModal(true)}>
+              ➕ Add Brand
+            </button>
+          </div>
         </div>
 
         {/* ── Brand cards ── */}
@@ -107,9 +122,15 @@ const Dashboard = () => {
             <div className="empty-state-text">No brands yet</div>
             <div className="empty-state-sub">Add your first phone brand to get started</div>
           </div>
+        ) : filteredPhones.length === 0 ? (
+          <div className="empty-state animate-in">
+            <div className="empty-state-icon">🔍</div>
+            <div className="empty-state-text">No matches found</div>
+            <div className="empty-state-sub">Try a different search term</div>
+          </div>
         ) : (
           <div className="grid-cards">
-            {phones.map((phone, i) => {
+            {filteredPhones.map((phone, i) => {
               const remaining = phone.models.reduce((s, m) => s + m.remaining, 0);
               const sold      = phone.models.reduce((s, m) => s + m.sold, 0);
               const total     = phone.models.reduce((s, m) => s + m.totalAdded, 0);
